@@ -18,9 +18,17 @@ app.use(cors({
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/todolist')
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log('MongoDB Connected Successfully');
+  } catch (err) {
+    console.error('MongoDB Connection Error:', err.message);
+    process.exit(1);
+  }
+};
+
+connectDB();
 
 // Serve static files
 app.use(express.static(path.join(__dirname)));
