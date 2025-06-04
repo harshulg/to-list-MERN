@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: to-list-mern-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://to-list-mern.onrender.com 
